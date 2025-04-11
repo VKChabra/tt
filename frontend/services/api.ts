@@ -1,9 +1,7 @@
-// API service for making requests to the backend
 import toast from "react-hot-toast";
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-// Flag to track if we've already shown the backend error toast
 let hasShownBackendError = false;
 
 // Helper function to show backend connection error

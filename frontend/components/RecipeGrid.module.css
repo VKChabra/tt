@@ -45,3 +45,62 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+.paginationContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.25rem;
+}
+
+.pageItem {
+  margin: 0.25rem;
+}
+
+.pageLink {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  color: var(--text-color);
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.pageLink:hover {
+  background-color: var(--secondary-color);
+}
+
+.active .pageLink {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.recipeCount {
+  text-align: center;
+  color: var(--light-text-color);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .pageLink {
+    padding: 0.4rem 0.6rem;
+    min-width: 2rem;
+  }
+}
