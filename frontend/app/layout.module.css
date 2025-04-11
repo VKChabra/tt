@@ -29,10 +29,20 @@
   text-decoration: underline;
 }
 
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+}
+
 .footer {
   background-color: var(--secondary-color);
   padding: 1.5rem 0;
-  margin-top: 3rem;
+  width: 100%;
 }
 
 .footerText {
