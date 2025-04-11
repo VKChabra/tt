@@ -29,10 +29,22 @@
   text-decoration: underline;
 }
 
+/* Add these styles to ensure the footer stays at the bottom */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.mainContent {
+  flex: 1; /* Takes up all available space, pushing footer down */
+}
+
+/* Update the existing footer styles */
 .footer {
   background-color: var(--secondary-color);
   padding: 1.5rem 0;
-  margin-top: 3rem;
+  width: 100%;
 }
 
 .footerText {
