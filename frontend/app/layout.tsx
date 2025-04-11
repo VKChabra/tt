@@ -39,35 +39,30 @@ export default function RootLayout({
           }}
         />
 
-        <div className={styles.pageContainer}>
-          <header className={styles.header}>
-            <div className={`container ${styles.headerContainer}`}>
-              <Link href="/" className={styles.logo}>
-                Recipe Explorer
-              </Link>
-              <nav className={styles.nav}>
-                <ul>
-                  <li className={styles.navItem}>
-                    <Link href="/" className={styles.navLink}>
-                      Home
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </header>
-
-          <main className={styles.mainContent}>{children}</main>
-
-          <footer className={styles.footer}>
-            <div className="container">
-              <p className={styles.footerText}>
-                © {new Date().getFullYear()} Recipe Explorer. All rights
-                reserved.
-              </p>
-            </div>
-          </footer>
-        </div>
+        <header className={styles.header}>
+          <div className={`container ${styles.headerContainer}`}>
+            <Link href="/" className={styles.logo}>
+              Recipe Explorer
+            </Link>
+            <nav className={styles.nav}>
+              <ul>
+                <li className={styles.navItem}>
+                  <Link href="/" className={styles.navLink}>
+                    Home
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+        <main>{children}</main>
+        <footer className={styles.footer}>
+          <div className="container">
+            <p className={styles.footerText}>
+              © {new Date().getFullYear()} Recipe Explorer. All rights reserved.
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );
