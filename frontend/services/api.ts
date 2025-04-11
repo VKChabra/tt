@@ -1,6 +1,29 @@
 // API service for making requests to the backend
+import toast from "react-hot-toast";
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+// Flag to track if we've already shown the backend error toast
+let hasShownBackendError = false;
+
+// Helper function to show backend connection error
+const showBackendConnectionError = () => {
+  if (!hasShownBackendError) {
+    toast.error(
+      "Backend server not detected. Please follow the instructions in README.md to start both frontend and backend servers.",
+      {
+        duration: 10000,
+        position: "top-right",
+        style: {
+          borderRadius: "10px",
+          background: "#f44336",
+          color: "#fff",
+        },
+      }
+    );
+    hasShownBackendError = true;
+  }
+};
 
 export interface Recipe {
   idMeal: string;
@@ -88,6 +111,7 @@ export const getRecipes = async (
     return data.success ? data.data : [];
   } catch (error) {
     console.error("Error fetching recipes:", error);
+    showBackendConnectionError();
     return [];
   }
 };
@@ -105,6 +129,7 @@ export const getRecipeById = async (id: string): Promise<Recipe | null> => {
     return data.success ? data.data : null;
   } catch (error) {
     console.error("Error fetching recipe details:", error);
+    showBackendConnectionError();
     return null;
   }
 };
@@ -122,6 +147,7 @@ export const getCategories = async (): Promise<Category[]> => {
     return data.success ? data.data : [];
   } catch (error) {
     console.error("Error fetching categories:", error);
+    showBackendConnectionError();
     return [];
   }
 };
@@ -139,6 +165,7 @@ export const getAreas = async (): Promise<Area[]> => {
     return data.success ? data.data : [];
   } catch (error) {
     console.error("Error fetching areas:", error);
+    showBackendConnectionError();
     return [];
   }
 };
@@ -156,6 +183,7 @@ export const getIngredients = async (): Promise<Ingredient[]> => {
     return data.success ? data.data : [];
   } catch (error) {
     console.error("Error fetching ingredients:", error);
+    showBackendConnectionError();
     return [];
   }
 };
