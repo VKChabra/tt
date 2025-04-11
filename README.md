@@ -10,8 +10,6 @@ around the world.
 - View detailed recipe information
 - Navigate between related recipes
 
-## Tech Stack
-
 ### Backend
 
 - Node.js with Express
@@ -23,8 +21,6 @@ around the world.
 - React.js with Next.js
 - TypeScript
 - Responsive design
-
-## Getting Started
 
 ### Prerequisites
 
@@ -38,4 +34,10 @@ around the world.
 
 ```bash
 npm run install:all
+```
+
+### Starting the Application
+
+```bash
+npm run start
 ```
