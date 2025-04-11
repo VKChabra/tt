@@ -1,9 +1,9 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import recipeRoutes from "./routes/recipeRoutes";
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import recipeRoutes from './routes/recipeRoutes.js';
+import logger from './utils/logger.js';
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/recipes", recipeRoutes);
+app.use('/api/recipes', recipeRoutes);
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  logger.info(`Server running on port ${PORT}`);
 });

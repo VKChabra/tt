@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Link from "next/link";
-import styles from "./layout.module.css";
-import { Toaster } from "react-hot-toast";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Link from 'next/link';
+import styles from './layout.module.css';
+import { Toaster } from 'react-hot-toast';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Recipe Explorer",
-  description: "Explore delicious recipes from around the world",
+  title: 'Recipe Explorer',
+  description: 'Explore delicious recipes from around the world'
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -25,16 +25,16 @@ export default function RootLayout({
           toastOptions={{
             duration: 5000,
             style: {
-              background: "#363636",
-              color: "#fff",
-              maxWidth: "500px",
+              background: '#363636',
+              color: '#fff',
+              maxWidth: '500px'
             },
             error: {
               style: {
-                background: "#f44336",
-                color: "#fff",
-              },
-            },
+                background: '#f44336',
+                color: '#fff'
+              }
+            }
           }}
         />
 
@@ -61,8 +61,7 @@ export default function RootLayout({
           <footer className={styles.footer}>
             <div className="container">
               <p className={styles.footerText}>
-                © {new Date().getFullYear()} Recipe Explorer. All rights
-                reserved.
+                © {new Date().getFullYear()} Recipe Explorer. All rights reserved.
               </p>
             </div>
           </footer>

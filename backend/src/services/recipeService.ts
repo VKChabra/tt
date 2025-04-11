@@ -1,5 +1,6 @@
-import axios from "axios";
-import dotenv from "dotenv";
+import axios from 'axios';
+import dotenv from 'dotenv';
+import logger from '../utils/logger.js';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ export interface Recipe {
   strArea?: string;
   strInstructions?: string;
   strMealThumb?: string;
-  [key: string]: any;
+  [key: string]: string | undefined;
 }
 
 export interface Category {
@@ -34,22 +35,19 @@ export interface Ingredient {
 }
 
 // Get recipes with optional filtering
-export const getRecipes = async (
-  filterType?: string,
-  filterValue?: string
-): Promise<Recipe[]> => {
+export const getRecipes = async (filterType?: string, filterValue?: string): Promise<Recipe[]> => {
   try {
     let url = `${BASE_URL}/search.php?s=`;
 
     if (filterType && filterValue) {
       switch (filterType) {
-        case "ingredient":
+        case 'ingredient':
           url = `${BASE_URL}/filter.php?i=${filterValue}`;
           break;
-        case "country":
+        case 'country':
           url = `${BASE_URL}/filter.php?a=${filterValue}`;
           break;
-        case "category":
+        case 'category':
           url = `${BASE_URL}/filter.php?c=${filterValue}`;
           break;
         default:
@@ -60,8 +58,8 @@ export const getRecipes = async (
     const response = await axios.get(url);
     return response.data.meals || [];
   } catch (error) {
-    console.error("Error fetching recipes:", error);
-    throw new Error("Failed to fetch recipes");
+    logger.error('Error fetching recipes:', error);
+    throw new Error('Failed to fetch recipes');
   }
 };
 
@@ -72,8 +70,8 @@ export const getRecipeById = async (id: string): Promise<Recipe | null> => {
     const response = await axios.get(url);
     return response.data.meals ? response.data.meals[0] : null;
   } catch (error) {
-    console.error("Error fetching recipe details:", error);
-    throw new Error("Failed to fetch recipe details");
+    logger.error('Error fetching recipe details:', error);
+    throw new Error('Failed to fetch recipe details');
   }
 };
 
@@ -84,8 +82,8 @@ export const getAllCategories = async (): Promise<Category[]> => {
     const response = await axios.get(url);
     return response.data.categories || [];
   } catch (error) {
-    console.error("Error fetching categories:", error);
-    throw new Error("Failed to fetch categories");
+    logger.error('Error fetching categories:', error);
+    throw new Error('Failed to fetch categories');
   }
 };
 
@@ -96,8 +94,8 @@ export const getAllAreas = async (): Promise<Area[]> => {
     const response = await axios.get(url);
     return response.data.meals || [];
   } catch (error) {
-    console.error("Error fetching areas:", error);
-    throw new Error("Failed to fetch areas");
+    logger.error('Error fetching areas:', error);
+    throw new Error('Failed to fetch areas');
   }
 };
 
@@ -108,19 +106,19 @@ export const getAllIngredients = async (): Promise<Ingredient[]> => {
     const response = await axios.get(url);
     return response.data.meals || [];
   } catch (error) {
-    console.error("Error fetching ingredients:", error);
-    throw new Error("Failed to fetch ingredients");
+    logger.error('Error fetching ingredients:', error);
+    throw new Error('Failed to fetch ingredients');
   }
 };
 
 // Helper function to get ingredient image URL
 export const getIngredientImageUrl = (
   ingredient: string,
-  size: "small" | "medium" | "large" | "default" = "default"
+  size: 'small' | 'medium' | 'large' | 'default' = 'default'
 ): string => {
-  const formattedIngredient = ingredient.replace(/\s+/g, "_").toLowerCase();
+  const formattedIngredient = ingredient.replace(/\s+/g, '_').toLowerCase();
 
-  if (size === "default") {
+  if (size === 'default') {
     return `https://www.themealdb.com/images/ingredients/${formattedIngredient}.png`;
   }
 
@@ -130,11 +128,11 @@ export const getIngredientImageUrl = (
 // Helper function to get meal thumbnail with size
 export const getMealThumbnailUrl = (
   imageUrl: string,
-  size: "small" | "medium" | "large" | null = null
+  size: 'small' | 'medium' | 'large' | null = null
 ): string => {
   if (!size) return imageUrl;
 
   // Extract the base part of the URL before any potential /preview
-  const baseUrl = imageUrl.replace(/\/preview$/, "");
+  const baseUrl = imageUrl.replace(/\/preview$/, '');
   return `${baseUrl}/${size}`;
 };

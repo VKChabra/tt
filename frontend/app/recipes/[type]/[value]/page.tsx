@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { getRecipes } from "@/services/api";
-import RecipeGrid from "@/components/RecipeGrid";
-import Loading from "@/components/Loading";
-import type { Recipe } from "@/services/api";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { getRecipes } from '@/services/api';
+import RecipeGrid from '@/components/RecipeGrid';
+import Loading from '@/components/Loading';
+import type { Recipe } from '@/services/api';
 
 export default function FilteredRecipes() {
   const params = useParams();
@@ -14,26 +14,26 @@ export default function FilteredRecipes() {
 
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [title, setTitle] = useState<string>("Filtered Recipes");
+  const [title, setTitle] = useState<string>('Filtered Recipes');
 
   useEffect(() => {
     const fetchRecipes = async () => {
       setLoading(true);
 
-      let displayTitle = "Recipes";
+      let displayTitle = 'Recipes';
 
       switch (filterType) {
-        case "ingredient":
-          displayTitle = `Recipes with ${filterValue.replace("_", " ")}`;
+        case 'ingredient':
+          displayTitle = `Recipes with ${filterValue.replace('_', ' ')}`;
           break;
-        case "country":
+        case 'country':
           displayTitle = `${filterValue} Recipes`;
           break;
-        case "category":
+        case 'category':
           displayTitle = `${filterValue} Recipes`;
           break;
         default:
-          displayTitle = "Filtered Recipes";
+          displayTitle = 'Filtered Recipes';
       }
 
       setTitle(displayTitle);

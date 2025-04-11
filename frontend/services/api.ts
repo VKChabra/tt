@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast';
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -8,15 +8,15 @@ let hasShownBackendError = false;
 const showBackendConnectionError = () => {
   if (!hasShownBackendError) {
     toast.error(
-      "Backend server not detected. Please follow the instructions in README.md to start both frontend and backend servers.",
+      'Backend server not detected. Please follow the instructions in README.md to start both frontend and backend servers.',
       {
         duration: 10000,
-        position: "top-right",
+        position: 'top-right',
         style: {
-          borderRadius: "10px",
-          background: "#f44336",
-          color: "#fff",
-        },
+          borderRadius: '10px',
+          background: '#f44336',
+          color: '#fff'
+        }
       }
     );
     hasShownBackendError = true;
@@ -89,26 +89,21 @@ export interface Ingredient {
 }
 
 // Get all recipes with optional filtering
-export const getRecipes = async (
-  filterType?: string,
-  filterValue?: string
-): Promise<Recipe[]> => {
+export const getRecipes = async (filterType?: string, filterValue?: string): Promise<Recipe[]> => {
   try {
     const queryParams =
-      filterType && filterValue
-        ? `?filterType=${filterType}&filterValue=${filterValue}`
-        : "";
+      filterType && filterValue ? `?filterType=${filterType}&filterValue=${filterValue}` : '';
 
     const response = await fetch(`${API_URL}/recipes${queryParams}`);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch recipes");
+      throw new Error('Failed to fetch recipes');
     }
 
     const data = await response.json();
     return data.success ? data.data : [];
   } catch (error) {
-    console.error("Error fetching recipes:", error);
+    console.error('Error fetching recipes:', error);
     showBackendConnectionError();
     return [];
   }
@@ -120,13 +115,13 @@ export const getRecipeById = async (id: string): Promise<Recipe | null> => {
     const response = await fetch(`${API_URL}/recipes/${id}`);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch recipe details");
+      throw new Error('Failed to fetch recipe details');
     }
 
     const data = await response.json();
     return data.success ? data.data : null;
   } catch (error) {
-    console.error("Error fetching recipe details:", error);
+    console.error('Error fetching recipe details:', error);
     showBackendConnectionError();
     return null;
   }
@@ -138,13 +133,13 @@ export const getCategories = async (): Promise<Category[]> => {
     const response = await fetch(`${API_URL}/recipes/categories`);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch categories");
+      throw new Error('Failed to fetch categories');
     }
 
     const data = await response.json();
     return data.success ? data.data : [];
   } catch (error) {
-    console.error("Error fetching categories:", error);
+    console.error('Error fetching categories:', error);
     showBackendConnectionError();
     return [];
   }
@@ -156,13 +151,13 @@ export const getAreas = async (): Promise<Area[]> => {
     const response = await fetch(`${API_URL}/recipes/areas`);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch areas");
+      throw new Error('Failed to fetch areas');
     }
 
     const data = await response.json();
     return data.success ? data.data : [];
   } catch (error) {
-    console.error("Error fetching areas:", error);
+    console.error('Error fetching areas:', error);
     showBackendConnectionError();
     return [];
   }
@@ -174,13 +169,13 @@ export const getIngredients = async (): Promise<Ingredient[]> => {
     const response = await fetch(`${API_URL}/recipes/ingredients`);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch ingredients");
+      throw new Error('Failed to fetch ingredients');
     }
 
     const data = await response.json();
     return data.success ? data.data : [];
   } catch (error) {
-    console.error("Error fetching ingredients:", error);
+    console.error('Error fetching ingredients:', error);
     showBackendConnectionError();
     return [];
   }

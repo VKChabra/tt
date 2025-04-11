@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import ReactPaginate from "react-paginate";
-import RecipeCard from "./RecipeCard";
-import { Recipe } from "@/services/api";
-import styles from "./RecipeGrid.module.css";
+import React, { useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
+import RecipeCard from './RecipeCard';
+import { Recipe } from '@/services/api';
+import styles from './RecipeGrid.module.css';
 
 interface RecipeGridProps {
   recipes: Recipe[];
@@ -29,7 +29,7 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes, title }) => {
 
   const handlePageChange = (selectedItem: { selected: number }) => {
     setCurrentPage(selectedItem.selected);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -43,7 +43,7 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes, title }) => {
       ) : (
         <>
           <div className={styles.grid}>
-            {paginatedRecipes.map(recipe => (
+            {paginatedRecipes.map((recipe) => (
               <RecipeCard key={recipe.idMeal} recipe={recipe} />
             ))}
           </div>
@@ -51,9 +51,9 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes, title }) => {
           {pageCount > 1 && (
             <div className={styles.paginationContainer}>
               <ReactPaginate
-                previousLabel={"Previous"}
-                nextLabel={"Next"}
-                breakLabel={"..."}
+                previousLabel={'Previous'}
+                nextLabel={'Next'}
+                breakLabel={'...'}
                 pageCount={pageCount}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={3}

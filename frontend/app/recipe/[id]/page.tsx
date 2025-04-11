@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { getRecipeById, getRecipes } from "@/services/api";
-import Loading from "@/components/Loading";
-import RecipeCard from "@/components/RecipeCard";
-import type { Recipe } from "@/services/api";
-import styles from "./page.module.css";
+import React, { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getRecipeById, getRecipes } from '@/services/api';
+import Loading from '@/components/Loading';
+import RecipeCard from '@/components/RecipeCard';
+import type { Recipe } from '@/services/api';
+import styles from './page.module.css';
 
 export default function RecipeDetail() {
   const params = useParams();
@@ -27,12 +27,9 @@ export default function RecipeDetail() {
       setRecipe(recipeData);
 
       if (recipeData?.strCategory) {
-        const categoryRecipes = await getRecipes(
-          "category",
-          recipeData.strCategory
-        );
+        const categoryRecipes = await getRecipes('category', recipeData.strCategory);
         // Filter out the current recipe
-        const filtered = categoryRecipes.filter(r => r.idMeal !== id);
+        const filtered = categoryRecipes.filter((r) => r.idMeal !== id);
         setRelatedRecipes(filtered);
       }
 
@@ -52,7 +49,7 @@ export default function RecipeDetail() {
     return (
       <div className={styles.notFound}>
         <h1 className={styles.notFoundTitle}>Recipe not found</h1>
-        <button onClick={() => router.push("/")} className={styles.backButton}>
+        <button onClick={() => router.push('/')} className={styles.backButton}>
           Back to Home
         </button>
       </div>
@@ -65,14 +62,10 @@ export default function RecipeDetail() {
     const ingredient = recipe[`strIngredient${i}`];
     const measure = recipe[`strMeasure${i}`];
 
-    if (
-      ingredient &&
-      typeof ingredient === "string" &&
-      ingredient.trim() !== ""
-    ) {
+    if (ingredient && typeof ingredient === 'string' && ingredient.trim() !== '') {
       ingredients.push({
         name: ingredient,
-        measure: typeof measure === "string" ? measure : "",
+        measure: typeof measure === 'string' ? measure : ''
       });
     }
   }
@@ -92,7 +85,7 @@ export default function RecipeDetail() {
                     alt={recipe.strMeal}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
               )}
@@ -103,10 +96,7 @@ export default function RecipeDetail() {
               <h1 className={styles.recipeTitle}>{recipe.strMeal}</h1>
 
               {recipe.strArea && (
-                <Link
-                  href={`/recipes/country/${recipe.strArea}`}
-                  className={styles.cuisineLink}
-                >
+                <Link href={`/recipes/country/${recipe.strArea}`} className={styles.cuisineLink}>
                   Cuisine: {recipe.strArea}
                 </Link>
               )}
@@ -116,10 +106,7 @@ export default function RecipeDetail() {
                 {ingredients.map((item, index) => (
                   <li key={index} className={styles.ingredientItem}>
                     <Link
-                      href={`/recipes/ingredient/${item.name.replace(
-                        " ",
-                        "_"
-                      )}`}
+                      href={`/recipes/ingredient/${item.name.replace(' ', '_')}`}
                       className={styles.ingredientLink}
                     >
                       {item.name}
@@ -135,7 +122,7 @@ export default function RecipeDetail() {
           <div className={styles.instructionsSection}>
             <h2 className={styles.instructionsTitle}>Instructions</h2>
             <div>
-              {recipe.strInstructions?.split("\r\n").map((paragraph, index) =>
+              {recipe.strInstructions?.split('\r\n').map((paragraph, index) =>
                 paragraph.trim() ? (
                   <p key={index} className={styles.instructionsParagraph}>
                     {paragraph}
@@ -160,7 +147,7 @@ export default function RecipeDetail() {
           </h2>
 
           <div className={styles.relatedRecipes}>
-            {relatedRecipes.slice(0, 5).map(relatedRecipe => (
+            {relatedRecipes.slice(0, 5).map((relatedRecipe) => (
               <RecipeCard key={relatedRecipe.idMeal} recipe={relatedRecipe} />
             ))}
 
